@@ -10,11 +10,19 @@
 </template>
 
 <script setup>
-    //상품 목록 데이터 임포트
-    import { sampleProducts } from '../data/sampleProducts';
+    import { ref, onMounted } from 'vue';
+    import axios from 'axios';
+    import ProductCard from '@/components/ProductCard.vue';
 
-    //재사용 가능한 카드 컴포넌트 임포트
-    import ProductCard from '../components/ProductCard.vue';
+    const products = ref([]); // 상품 목록 상태 변수
 
-    const products = sampleProducts;
+    // 마운트 될 때 상픔 목록 API 호출
+    onMounted(async () => {
+        try{
+            const response = await axios.get('http://localhost:4000/api/products');
+            products.value = response.data;
+        } catch(error){
+            console.error('상품 목록을 불러오는데 실패 : ', error);
+        }
+    });
 </script>
