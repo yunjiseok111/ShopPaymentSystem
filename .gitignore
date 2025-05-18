@@ -1,0 +1,12 @@
+# node modules
+node_modules/
+
+# server 환경 변수파일
+server/.env
+
+# 로그 파일
+*.log
+
+# 시스템 파일
+
+# 빌드 결과물
