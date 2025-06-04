@@ -8,19 +8,35 @@
 </template>
 
 <script setup>
-    //defineProps - 부모 컴포넌트에서 전달받은 props를 정의
-    defineProps({
-        //product라는 이름의 prop를 객체 형태로 전달받음
+    import axios from 'axios';
+    import { onMounted } from 'vue';
+    
+    // props 선언 및 변수 받아오기
+    const props = defineProps({
         product: {
             type: Object,
             required: true,
         },
     });
 
-    //기능구현 전이라 일단 alert 알림창만 표시되도록 함. <수정 예정>
-    const onBuyClick = () => {
-        alert(`"${product.title}" 상품 구매를 시작합니다.`);
+    // 구매 버튼 클릭 시 -> 결제 API 호출 후 checkoutUrl로 이동
+    const onBuyClick = async () =>{
+        const tossPayments = window.TossPayments('test_ck_6bJXmgo28eEPOBWYEXvw8LAnGKWx');
+        try{
+                await tossPayments.requestPayment('카드', {
+                    amount: props.product.price,
+                    orderId: `order_${Date.now()}`,
+                    orderName: props.product.title,
+                    customerName: '테스트 사용자', //임시
+                    successUrl: `${window.location.origin}/payment/success`,
+                    failUrl: `${window.location.origin}/pament/fail`
+                });
+                
+        } catch(error){
+            console.error('결제 실패: ', error);
+        }
     };
+
 </script>
 
 <!-- product-card에 대한 스타일시트 -->

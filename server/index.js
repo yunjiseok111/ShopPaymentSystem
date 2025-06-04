@@ -16,7 +16,7 @@ app.get('/', (req, res) => {
 });
 
 // 라우트 등록
-app.use('/api/payment', paymentRoutes);
+app.use('/api/payment', require('./routes/payment'));
 app.use('/api/products', productRoutes);
 
 app.listen(PORT, () => {

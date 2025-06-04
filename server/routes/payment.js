@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const { requestPayment } = require('../controllers/paymentController');
+const { confirmPayment } = require('../controllers/paymentController');
 
 // 결제 요청 POST API
-router.post('/', requestPayment);
+router.post('/confirm', confirmPayment);
 
 module.exports = router;
