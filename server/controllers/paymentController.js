@@ -13,7 +13,7 @@ exports.confirmPayment = async (req, res) => {
             { paymentKey, orderId, amount },
             {
                 headers: {
-                    Authorization: 'Basic ' + Buffer.from('${process.env.TOSS_SECRET_KEY}:').toString('base64'),
+                    Authorization: 'Basic ' + Buffer.from(`${process.env.TOSS_SECRET_KEY}:`).toString('base64'),
                     'Content-Type': 'application/json',
                 },
             }

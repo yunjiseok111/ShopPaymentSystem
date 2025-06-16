@@ -20,13 +20,19 @@ const goHome = () => {
 };
 
 onMounted(async () => {
-  const { paymentKey, orderId, amount } = route.query;
+  const { paymentKey, orderId, amount, productId } = route.query;
 
   try {
     const response = await axios.post('http://localhost:4000/api/payment/confirm', {
       paymentKey,
       orderId,
       amount,
+      productId,
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`
+      }
     });
     console.log('결제 확인 성공: ', response.data);
   } catch (error) {
