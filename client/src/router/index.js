@@ -5,6 +5,8 @@ import Fail from '@/views/payment/Fail.vue';
 
 const routes = [
   { path: '/', component: ProductList },
+  { path: '/login', component: Login },
+  { path: '/register', component: Register },
   { path: '/payment/success', component: Success },
   { path: '/payment/fail', component: Fail },
 ];
